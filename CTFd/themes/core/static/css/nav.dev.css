@@ -1,0 +1,11 @@
+.fade-out {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.5s, opacity 0.5s linear;
+}
+.fade-in {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s linear;
+}
+@media (min-width:0px) and (max-width:767.98px){#nav-con{background-color: #042e60; opacity: 0.6;}}

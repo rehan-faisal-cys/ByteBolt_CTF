@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+		<h1>Register</h1>
+</div>
+	{% include "components/errors.html" %}
+
+	{% if integrations.mlc() %}
+	<a class="btn btn-secondary btn-lg btn-block" href="{{ url_for('auth.oauth_login') }}">
+		Login with Major League Cyber
+	</a>
+
+	<hr>
+	{% endif %}
+			<div class="wrapper fadeInDown" style="margin-top: 0rem;">
+				<div id="formContent">
+				  <!-- Tabs Titles -->
+			  
+				  <!-- Icon -->
+				  <div class="fadeIn first">
+					<img class="w-75 mx-auto " style="max-width: 200px;" src="{{ url_for('views.themes', path='img/logo_c.png') }}"
+				  </div>
+				  {% with form = Forms.auth.RegistrationForm() %}
+				  {% from "macros/forms.html" import render_extra_fields %}
+			<form method="post" accept-charset="utf-8" autocomplete="off" role="form">
+				  
+					  <!-- Login Form -->
+					  <!-- Username -->
+						<div class="w-100 d-flex justify-content-center align-items-center">
+						  <div class="input-group d-flex w-75 user2">
+							<div class="input-group-prepend d-flex user1">
+							  <span class="input-group-text" style="border-radius: 0.375rem !important">
+								<svg
+								  aria-hidden="true"
+								  focusable="false"
+								  data-prefix="far"
+								  data-icon="user"
+								  class="svg-inline--fa fa-user text-black-50"
+								  role="img"
+								  xmlns="http://www.w3.org/2000/svg"
+								  viewBox="0 0 448 512"
+								  style=" width: 1rem; "
+								>
+								  <path
+									fill="currentColor"
+									d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"
+								  ></path>
+								</svg>
+							  </span>
+							  
+							</div>
+							{{ form.name(class="fadeIn second intag",placeholder="Username",type="text", value=name,autocomplete="off") }}
+							
+						  </div>
+						</div>
+						<!-- Email -->
+						<div class="w-100 d-flex justify-content-center align-items-center mt-2 mb-2">
+							<div class="input-group d-flex w-75 user2">
+							  <div class="input-group-prepend d-flex user1">
+								<span class="input-group-text" style="border-radius: 0.375rem !important">
+									<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="envelope" class="svg-inline--fa fa-envelope text-black-50" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style=" width: 1rem; ">
+										<path fill="currentColor" d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z">
+
+										</path>
+									</svg>
+							  </div>
+							  {{ form.email(class="fadeIn emailanim intag",placeholder="Email",type="email", value=email,autocomplete="off") }}
+							</div>
+						  </div>
+						  <!-- Password -->
+						<div class="w-100 d-flex justify-content-center align-items-center mt-2 mb-2">
+						  <div class="input-group d-flex w-75 user2">
+							<div class="input-group-prepend d-flex user1">
+							  <span class="input-group-text" style="border-radius: 0.375rem !important">
+								<svg
+								  aria-hidden="true"
+								  focusable="false"
+								  data-prefix="far"
+								  data-icon="user"
+								  class="svg-inline--fa fa-user text-black-50"
+								  role="img"
+								  xmlns="http://www.w3.org/2000/svg"
+								  viewBox="0 0 448 512"
+								  style=" width: 1rem; "
+								>
+								<path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path>
+								</svg>
+							  </span>
+							</div>
+							{{ form.password(class="fadeIn third intag",placeholder="Password",style="font-size:small", value=password,autocomplete="off") }}
+						  </div>
+						</div>
+						{{ form.nonce() }}
+		
+						{{ render_extra_fields(form.extra) }} 
+						
+						{{ form.submit(class="fadeIn fourth",style="padding: 20px 80px !important;",value="Register") }}
+						{% if Configs.tos_or_privacy %}
+				<div class="row pt-3">
+					<div class="col-md-12 text-center">
+						<small class="text-muted text-center">
+							By registering, you agree to the
+							<a href="{{ Configs.privacy_link }}" rel="noopener" target="_blank">privacy policy</a>
+							and <a href="{{ Configs.tos_link }}" rel="noopener" target="_blank">terms of service</a>
+						</small>
+					</div>
+				</div>
+				{% endif %}
+			</form>
+				{% endwith %}
+				{% endblock %}
+{% block scripts %}
+{% endblock %}
